@@ -2,7 +2,7 @@ College Demo Database
 
 Description
 
-This SQL file creates a college database management system containing departments, students, courses, and student enrollments. It demonstrates primary keys, foreign keys, unique constraints, CHECK constraints, data insertion, and INNER JOIN.
+This SQL file creates a College Database Management System containing departments, students, courses, and student enrollments. It demonstrates primary keys, foreign keys, unique constraints, "CHECK" constraints, data insertion, and "INNER JOIN".
 
 1. Create Database
 
@@ -14,15 +14,17 @@ Creates the "college_demo" database if it does not already exist and selects it 
 2. Remove Existing Tables
 
 SET FOREIGN_KEY_CHECKS = 0;
+
 DROP TABLE IF EXISTS enrollment;
 DROP TABLE IF EXISTS student;
 DROP TABLE IF EXISTS course;
 DROP TABLE IF EXISTS department;
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 Temporarily disables foreign-key checking so the existing tables can be safely deleted and recreated.
 
-🏢 3. Department Table
+3. Department Table
 
 The "department" table stores department information.
 
@@ -77,9 +79,9 @@ The file inserts:
 - 2 departments: Computer Science and Electronics
 - 2 students: Hansika and Ashwin
 - 2 courses: DBMS and Circuits
-- 2 enrollment records: including semester and grades
+- 2 enrollment records including semester and grades
 
-🔗 8. INNER JOIN Query
+8. INNER JOIN Query
 
 The final query combines information from all four tables:
 
@@ -88,15 +90,52 @@ INNER JOIN student s ON e.roll_no = s.roll_no
 INNER JOIN course c ON e.course_id = c.course_id
 INNER JOIN department d ON s.dept_id = d.dept_id;
 
-"INNER JOIN" connects the related records using their primary and foreign keys and displays complete student enrollment information.
+"INNER JOIN" connects related records using their primary and foreign keys and displays complete student enrollment information.
 
-Expected Output
+9. Expected Output
 
 Roll No| Student Name| Department| Course| Semester| Grade
 101| Hansika| Computer Science| DBMS| 3| A
 102| Ashwin| Electronics| Circuits| 3| B
 
-Concepts Demonstrated
+10. Normalization (NF)
+
+Normalization is the process of organizing database tables to reduce data redundancy and prevent insertion, update, and deletion anomalies.
+
+Normal Forms Used
+
+This database is designed to satisfy up to 3NF (Third Normal Form) under the stated table relationships.
+
+1NF — First Normal Form
+
+The database satisfies 1NF because:
+
+- Each column contains atomic/single values.
+- There are no repeating groups.
+- Each row represents a single record.
+- Each table has an appropriate key.
+
+2NF — Second Normal Form
+
+The database satisfies 2NF because:
+
+- It is already in 1NF.
+- Non-key attributes depend on the complete primary key.
+- In the "enrollment" table, attributes such as "semester" and "grade" depend on the enrollment key combination.
+
+3NF — Third Normal Form
+
+The database satisfies 3NF because:
+
+- It is already in 2NF.
+- Non-key attributes depend only on the primary key.
+- Department details are stored separately in the "department" table.
+- Course details are stored separately in the "course" table.
+- Student details are stored separately in the "student" table.
+
+NF Used: 1NF, 2NF, and 3NF (up to 3NF).
+
+11. Concepts Demonstrated
 
 - Database creation
 - Table creation
@@ -109,9 +148,10 @@ Concepts Demonstrated
 - Data insertion
 - "INNER JOIN"
 - Table relationships
+- Normalization up to 3NF
 - Retrieving combined data from multiple tables
 
-How to Run
+12. How to Run
 
 1. Open MySQL Workbench or a MySQL terminal.
 2. Copy the complete SQL code.
